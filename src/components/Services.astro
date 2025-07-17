@@ -1,0 +1,134 @@
+---
+const services = [
+  {
+    title: "Producción de Moda",
+    description: "Dirección creativa completa para sesiones fotográficas, desde conceptualización hasta ejecución final.",
+    features: ["Concept Development", "Styling", "Art Direction", "Team Coordination"],
+    icon: "✨",
+    bgColor: "bg-amber-50",
+    borderColor: "border-amber-200",
+    iconColor: "bg-amber-600",
+    textColor: "text-amber-800"
+  },
+  {
+    title: "Community Management",
+    description: "Gestión estratégica de redes sociales para construir y mantener comunidades comprometidas.",
+    features: ["Content Strategy", "Social Media Management", "Community Engagement", "Analytics & Reporting"],
+    icon: "📱",
+    bgColor: "bg-stone-50",
+    borderColor: "border-stone-200",
+    iconColor: "bg-stone-600",
+    textColor: "text-stone-800"
+  },
+  {
+    title: "Branding & Identity",
+    description: "Desarrollo de identidades visuales únicas que conectan emocionalmente con tu audiencia.",
+    features: ["Logo Design", "Visual Identity", "Brand Guidelines", "Marketing Materials"],
+    icon: "🎨",
+    bgColor: "bg-amber-100",
+    borderColor: "border-amber-300",
+    iconColor: "bg-amber-700",
+    textColor: "text-amber-900"
+  },
+  {
+    title: "Fotografía",
+    description: "Sesiones fotográficas profesionales con enfoque en moda, lifestyle y productos.",
+    features: ["Fashion Photography", "Product Shoots", "Lifestyle Sessions", "Post-Production"],
+    icon: "📸",
+    bgColor: "bg-stone-100",
+    borderColor: "border-stone-300",
+    iconColor: "bg-stone-700",
+    textColor: "text-stone-900"
+  }
+];
+---
+
+<section id="services" class="py-20 px-6 bg-white">
+  <div class="container mx-auto max-w-7xl">
+    
+    <!-- Header -->
+    <div class="text-center mb-16 fade-in">
+      <div class="inline-flex items-center px-4 py-2 bg-amber-50 border border-amber-200 rounded-full mb-6">
+        <span class="text-amber-800 text-sm font-medium">Servicios</span>
+      </div>
+      
+      <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 text-amber-900">
+        Soluciones creativas para 
+        <span class="text-amber-700">marcas únicas</span>
+      </h2>
+      <p class="text-xl text-amber-800 max-w-3xl mx-auto">
+        Servicios integrales diseñados para transformar tu visión en resultados tangibles 
+        que conecten con tu audiencia y generen impacto real.
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid lg:grid-cols-2 gap-8">
+      {services.map((service, index) => (
+        <div class="service-card fade-in group" data-aos-delay={index * 200}>
+          <div class={`relative p-8 ${service.bgColor} rounded-2xl border ${service.borderColor} hover:shadow-lg transition-all duration-500 overflow-hidden`}>
+            
+            <!-- Content -->
+            <div class="relative z-10">
+              <div class="flex items-center mb-6">
+                <div class={`w-12 h-12 ${service.iconColor} rounded-xl flex items-center justify-center mr-4`}>
+                  <span class="text-2xl text-white">{service.icon}</span>
+                </div>
+                <h3 class="text-2xl font-bold text-amber-900">{service.title}</h3>
+              </div>
+              
+              <p class="text-amber-800 text-lg mb-6 leading-relaxed">
+                {service.description}
+              </p>
+              
+              <ul class="space-y-3 mb-8">
+                {service.features.map((feature) => (
+                  <li class="flex items-center text-amber-800">
+                    <div class={`w-2 h-2 rounded-full ${service.iconColor} mr-3`}></div>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              
+              <button class={`w-full py-3 px-6 ${service.iconColor} rounded-xl text-white font-semibold hover:scale-105 transition-transform duration-200 shadow-md hover:shadow-lg`}>
+                Más Información
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Section -->
+    <div class="mt-20 text-center fade-in">
+      <div class="bg-stone-800 rounded-3xl p-12 border border-stone-200">
+        <h3 class="text-3xl font-bold text-stone-100 mb-6">
+          ¿Listo para llevar tu marca al siguiente nivel?
+        </h3>
+        <p class="text-stone-300 text-lg mb-8 max-w-2xl mx-auto">
+          Trabajemos juntos para crear experiencias visuales que capturen la esencia 
+          de tu marca y conecten genuinamente con tu audiencia.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#contact" class="px-8 py-4 bg-rose-400 hover:bg-rose-500 rounded-full text-white font-semibold hover:scale-105 transition-transform duration-200">
+            Iniciar Proyecto
+          </a>
+          <a href="#portfolio" class="px-8 py-4 border-2 border-stone-300 rounded-full text-stone-100 font-semibold hover:bg-stone-100 hover:text-stone-800 transition-all duration-300">
+            Ver Portfolio
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-card {
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px);
+  }
+</style>

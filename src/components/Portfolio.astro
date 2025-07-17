@@ -1,0 +1,69 @@
+---
+// Portfolio simple con pocos proyectos destacados
+const portfolioItems = [
+  {
+    id: 1,
+    title: "Fashion Campaign",
+    category: "Producción",
+    image: "/images/portfolio-1.svg",
+    description: "Campaña editorial para marca de moda emergente"
+  },
+  {
+    id: 2,
+    title: "Social Media Strategy",
+    category: "Community",
+    image: "/images/portfolio-2.svg", 
+    description: "Estrategia integral de redes sociales"
+  },
+  {
+    id: 3,
+    title: "Brand Identity",
+    category: "Branding",
+    image: "/images/portfolio-3.svg",
+    description: "Desarrollo de identidad visual completa"
+  },
+  {
+    id: 4,
+    title: "Product Photography",
+    category: "Producción",
+    image: "/images/portfolio-4.svg",
+    description: "Sesión fotográfica de productos premium"
+  }
+];
+---
+
+<section id="portfolio" class="py-20 px-6 bg-white">
+  <div class="container mx-auto max-w-6xl">
+    
+    <!-- Simple Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-display font-light mb-4 text-black">
+        Portfolio
+      </h2>
+      <p class="text-gray-600 max-w-md mx-auto">
+        Algunos de mis trabajos más recientes
+      </p>
+    </div>
+
+    <!-- Simple Grid -->
+    <div class="grid md:grid-cols-2 gap-8">
+      {portfolioItems.map((item) => (
+        <div class="group cursor-pointer">
+          <!-- Image -->
+          <div class="aspect-square bg-gray-100 mb-4 overflow-hidden">
+            <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+              <div class="text-4xl opacity-30">📸</div>
+            </div>
+          </div>
+          
+          <!-- Info -->
+          <div>
+            <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">{item.category}</p>
+            <h3 class="text-lg font-medium text-black mb-2">{item.title}</h3>
+            <p class="text-gray-600 text-sm">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,12 +1,24 @@
-# Astro Starter Kit: Basics
+# 🌟 Portfolio Valentina Bozzone
 
-```sh
-npm create astro@latest -- --template basics
-```
+Un portfolio moderno y elegante para una productora de moda y community manager, diseñado con efectos visuales impactantes y grids dinámicos.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## ✨ Características
+
+- 🎨 **Diseño Moderno**: Interfaz elegante con gradientes y efectos visuales
+- 📱 **Responsive**: Completamente adaptable a todos los dispositivos
+- 🎬 **Animaciones Fluidas**: Efectos de parallax, fade-in y transiciones suaves
+- 🖼️ **Grid Dinámico**: Portfolio con filtros interactivos y modal de detalles
+- ⚡ **Performance**: Optimizado con Astro para carga ultra-rápida
+- 🎯 **UX Avanzada**: Cursor personalizado, scroll suave y animaciones de partículas
+
+## 🛠️ Tecnologías
+
+- **Astro** - Framework web moderno
+- **Tailwind CSS** - Estilos utilitarios
+- **TypeScript** - Tipado estático
+- **Vanilla JavaScript** - Interactividad pura
+
+## 🚀 Instalación
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 

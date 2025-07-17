@@ -1,0 +1,71 @@
+---
+---
+
+---
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+  <nav class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="text-xl font-display font-light">
+        <span class="text-black">Valentina Bozzone</span>
+      </div>
+      
+      <!-- Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="nav-link text-gray-600 hover:text-black transition-colors duration-300">Inicio</a>
+        <a href="#about" class="nav-link text-gray-600 hover:text-black transition-colors duration-300">Sobre Mí</a>
+        <a href="#portfolio" class="nav-link text-gray-600 hover:text-black transition-colors duration-300">Portfolio</a>
+        <a href="#contact" class="nav-link text-gray-600 hover:text-black transition-colors duration-300">Contacto</a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button class="md:hidden mobile-menu-btn text-black">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile navigation -->
+    <div class="mobile-menu hidden md:hidden mt-4 pb-4">
+      <div class="flex flex-col space-y-4">
+        <a href="#home" class="text-gray-600 hover:text-black transition-colors duration-300">Inicio</a>
+        <a href="#about" class="text-gray-600 hover:text-black transition-colors duration-300">Sobre Mí</a>
+        <a href="#portfolio" class="text-gray-600 hover:text-black transition-colors duration-300">Portfolio</a>
+        <a href="#contact" class="text-gray-600 hover:text-black transition-colors duration-300">Contacto</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    mobileMenuBtn?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        
+        if (targetId) {
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+  });
+</script>
