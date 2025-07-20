@@ -67,14 +67,14 @@
           if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
             // Remover clase activa de todos los enlaces
             navItems.forEach(function(item) {
-              item.classList.remove('text-black', 'border-b-2', 'border-black');
+              item.classList.remove('text-black', 'active-nav');
               item.classList.add('text-gray-600');
             });
             
             // Agregar clase activa al enlace actual
             if (navItem) {
               navItem.classList.remove('text-gray-600');
-              navItem.classList.add('text-black', 'border-b-2', 'border-black');
+              navItem.classList.add('text-black', 'active-nav');
             }
           }
         });
@@ -103,7 +103,7 @@
         const href = item.getAttribute('href');
         if (href === currentPath || (currentPath === '/' && href === '/')) {
           item.classList.remove('text-gray-600');
-          item.classList.add('text-black', 'border-b-2', 'border-black');
+          item.classList.add('text-black', 'active-nav');
         }
       });
     }
@@ -128,3 +128,38 @@
     });
   });
 </script>
+
+<style>
+  .nav-link {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  .nav-link:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  .nav-link:active {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  .active-nav {
+    position: relative;
+  }
+  
+  .active-nav::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: black;
+    transition: all 0.3s ease;
+  }
+</style>
