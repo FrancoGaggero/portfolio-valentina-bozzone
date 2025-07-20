@@ -49,6 +49,65 @@
       mobileMenu?.classList.toggle('hidden');
     });
 
+    // Navegación activa basada en scroll - solo para la página principal
+    if (window.location.pathname === '/') {
+      const sections = document.querySelectorAll('section[id]');
+      const navItems = document.querySelectorAll('.nav-link');
+
+      function setActiveNavItem() {
+        const scrollPosition = window.scrollY + 150;
+
+        sections.forEach(function(section) {
+          const rect = section.getBoundingClientRect();
+          const sectionTop = window.pageYOffset + rect.top;
+          const sectionBottom = sectionTop + rect.height;
+          const sectionId = section.getAttribute('id');
+          const navItem = document.querySelector('.nav-link[href="/#' + sectionId + '"], .nav-link[href="#' + sectionId + '"]');
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            // Remover clase activa de todos los enlaces
+            navItems.forEach(function(item) {
+              item.classList.remove('text-black', 'border-b-2', 'border-black');
+              item.classList.add('text-gray-600');
+            });
+            
+            // Agregar clase activa al enlace actual
+            if (navItem) {
+              navItem.classList.remove('text-gray-600');
+              navItem.classList.add('text-black', 'border-b-2', 'border-black');
+            }
+          }
+        });
+      }
+
+      // Ejecutar al cargar la página
+      setActiveNavItem();
+
+      // Ejecutar al hacer scroll
+      let isScrolling = false;
+      window.addEventListener('scroll', function() {
+        if (!isScrolling) {
+          window.requestAnimationFrame(function() {
+            setActiveNavItem();
+            isScrolling = false;
+          });
+          isScrolling = true;
+        }
+      });
+    } else {
+      // Marcar página activa para otras páginas
+      const currentPath = window.location.pathname;
+      const navItems = document.querySelectorAll('.nav-link');
+      
+      navItems.forEach(function(item) {
+        const href = item.getAttribute('href');
+        if (href === currentPath || (currentPath === '/' && href === '/')) {
+          item.classList.remove('text-gray-600');
+          item.classList.add('text-black', 'border-b-2', 'border-black');
+        }
+      });
+    }
+
     // Smooth scrolling
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', (e) => {

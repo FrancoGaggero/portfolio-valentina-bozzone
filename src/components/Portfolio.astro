@@ -3,31 +3,32 @@
 const portfolioItems = [
   {
     id: 1,
-    title: "Fashion Campaign",
-    category: "Producción",
-    image: "/images/portfolio-1.svg",
-    description: "Campaña editorial para marca de moda emergente"
+    title: "Producción fotográfica",
+    category: "Producción de Moda",
+    images: ["images/franco1.jpg", "images/abril1.jpg", "images/franco2.jpg", 
+                "images/abril2.jpg", "images/francoabril.jpg"], // Carrusel para este proyecto
+    description: "Creación de prototipos y dirección creativa."
   },
   {
     id: 2,
-    title: "Social Media Strategy",
-    category: "Community",
-    image: "/images/portfolio-2.svg", 
-    description: "Estrategia integral de redes sociales"
+    title: "Piezas gráficas",
+    category: "Community Management",
+    images: ["images/blazer.png", "images/torta1.png", "images/torta3.png" ], // Carrusel para este proyecto
+    description: "Piezas para redes sociales, estrategia de contenido."
   },
   {
     id: 3,
-    title: "Brand Identity",
-    category: "Branding",
-    image: "/images/portfolio-3.svg",
-    description: "Desarrollo de identidad visual completa"
+    title: "Producción fotográfica",
+    category: "Producción de Moda",
+    images: ["images/valen1.jpg", "images/valen2.jpg"], // Carrusel para este proyecto
+    description: "Dirección creativa."
   },
   {
     id: 4,
-    title: "Product Photography",
-    category: "Producción",
-    image: "/images/portfolio-4.svg",
-    description: "Sesión fotográfica de productos premium"
+    title: "Producción fotográfica",
+    category: "Producción de Moda",
+    images: ["images/valen3.JPG", "images/valen4.jpg"], // Carrusel para este proyecto
+    description: "Dirección creativa."
   }
 ];
 ---
@@ -49,11 +50,41 @@ const portfolioItems = [
     <div class="grid md:grid-cols-2 gap-8">
       {portfolioItems.map((item) => (
         <div class="group cursor-pointer">
-          <!-- Image -->
-          <div class="aspect-square bg-gray-100 mb-4 overflow-hidden">
-            <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
-              <div class="text-4xl opacity-30">📸</div>
-            </div>
+          <!-- Image or Carousel -->
+          <div class="aspect-square bg-gray-100 mb-4 overflow-hidden relative">
+            {item.images ? (
+              <!-- Carousel for first project -->
+              <div class="carousel-container relative w-full h-full" data-carousel={`carousel-${item.id}`}>
+                {item.images.map((img, index) => (
+                  <div 
+                    class={`carousel-slide absolute inset-0 transition-opacity duration-500 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+                    data-slide={index}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${item.title} - Imagen ${index + 1}`}
+                      class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                ))}
+                
+                <!-- Navigation dots -->
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {item.images.map((_, index) => (
+                    <button 
+                      class={`carousel-dot w-2 h-2 rounded-full transition-all duration-300 ${index === 0 ? 'bg-white' : 'bg-white/50'}`}
+                      data-slide-to={index}
+                      data-carousel={`carousel-${item.id}`}
+                    ></button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <!-- Single placeholder for other projects -->
+              <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+                <div class="text-4xl opacity-30">📸</div>
+              </div>
+            )}
           </div>
           
           <!-- Info -->
@@ -67,3 +98,55 @@ const portfolioItems = [
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Carousel functionality
+    const carousels = document.querySelectorAll('[data-carousel]');
+    
+    carousels.forEach(carousel => {
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const dots = carousel.querySelectorAll('.carousel-dot');
+      let currentSlide = 0;
+      
+      // Auto-rotate every 3 seconds
+      let autoRotate = setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }, 3000);
+      
+      // Click handlers for dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          currentSlide = index;
+          showSlide(currentSlide);
+          // Reset auto-rotate timer
+          clearInterval(autoRotate);
+          setTimeout(() => {
+            autoRotate = setInterval(() => {
+              currentSlide = (currentSlide + 1) % slides.length;
+              showSlide(currentSlide);
+            }, 3000);
+          }, 5000);
+        });
+      });
+      
+      function showSlide(slideIndex: number) {
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('opacity-100', index === slideIndex);
+          slide.classList.toggle('opacity-0', index !== slideIndex);
+        });
+        
+        dots.forEach((dot, index) => {
+          if (index === slideIndex) {
+            dot.classList.remove('bg-white/50');
+            dot.classList.add('bg-white');
+          } else {
+            dot.classList.remove('bg-white');
+            dot.classList.add('bg-white/50');
+          }
+        });
+      }
+    });
+  });
+</script>
