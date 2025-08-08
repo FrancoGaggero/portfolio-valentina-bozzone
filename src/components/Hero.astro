@@ -7,24 +7,24 @@
       
       <!-- Main Heading -->
       <h1 class="text-6xl md:text-8xl lg:text-9xl font-display font-light mb-8 leading-tight tracking-tight">
-        <span class="text-black">Valentina</span>
+        <span class="text-black hero-name-first">Valentina</span>
         <br>
-        <span class="text-gray-500">Bozzone</span>
+        <span class="text-gray-500 hero-name-last">Bozzone</span>
       </h1>
       
       <!-- Simple Subtitle -->
-      <p class="text-lg md:text-xl text-gray-500 mb-12 max-w-md mx-auto font-light">
+      <p class="text-lg md:text-xl text-gray-500 mb-12 max-w-md mx-auto font-light hero-subtitle">
         Productora de Moda y Community Manager
       </p>
       
       <!-- Single CTA -->
-      <a href="#portfolio" class="inline-flex items-center px-8 py-3 bg-black hover:bg-gray-800 text-white font-medium transition-all duration-300 hover:scale-105">
+      <a href="#portfolio" class="inline-flex items-center px-8 py-3 bg-black hover:bg-gray-800 text-white font-medium transition-all duration-300 hover:scale-105 hero-cta">
         Ver Portfolio
       </a>
     </div>
     
     <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hero-scroll">
       <div class="text-gray-400">
         <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -33,3 +33,99 @@
     </div>
   </div>
 </section>
+
+<script>
+  // Cargar Anime.js desde CDN para el Hero
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+  script.onload = () => {
+    initHeroAnimations();
+  };
+  document.head.appendChild(script);
+  
+  function initHeroAnimations() {
+    // Ocultar elementos inicialmente
+    const heroElements = document.querySelectorAll('.hero-name-first, .hero-name-last, .hero-subtitle, .hero-cta, .hero-scroll');
+    heroElements.forEach(el => {
+      (el as HTMLElement).style.opacity = '0';
+    });
+    
+    // Timeline de animaciones
+    // @ts-ignore - anime is loaded globally
+    const tl = anime.timeline({
+      easing: 'easeOutExpo',
+      duration: 1000
+    });
+    
+    // Animación del primer nombre "Valentina" - desde la izquierda
+    tl.add({
+      targets: '.hero-name-first',
+      translateX: [-100, 0],
+      opacity: [0, 1],
+      duration: 1200,
+      easing: 'easeOutCubic'
+    })
+    
+    // Animación del apellido "Bozzone" - desde la derecha
+    .add({
+      targets: '.hero-name-last',
+      translateX: [100, 0],
+      opacity: [0, 1],
+      duration: 1200,
+      easing: 'easeOutCubic'
+    }, '-=800') // Empieza 800ms antes de que termine la anterior
+    
+    // Animación del subtítulo - fade in desde abajo
+    .add({
+      targets: '.hero-subtitle',
+      translateY: [30, 0],
+      opacity: [0, 1],
+      duration: 800,
+      easing: 'easeOutQuart'
+    }, '-=400')
+    
+    // Animación del botón CTA - escala desde pequeño
+    .add({
+      targets: '.hero-cta',
+      scale: [0.8, 1],
+      opacity: [0, 1],
+      duration: 600,
+      easing: 'easeOutBack'
+    }, '-=200')
+    
+    // Animación del scroll indicator - aparece al final
+    .add({
+      targets: '.hero-scroll',
+      opacity: [0, 1],
+      duration: 400
+    }, '-=100');
+    
+    // Efecto adicional: Hover en el nombre para darle vida
+    document.querySelector('.hero-name-first')?.addEventListener('mouseenter', () => {
+      // @ts-ignore - anime is loaded globally
+      anime({
+        targets: '.hero-name-first',
+        scale: [1, 1.05, 1],
+        duration: 400,
+        easing: 'easeOutElastic(1, .8)'
+      });
+    });
+    
+    document.querySelector('.hero-name-last')?.addEventListener('mouseenter', () => {
+      // @ts-ignore - anime is loaded globally
+      anime({
+        targets: '.hero-name-last',
+        scale: [1, 1.05, 1],
+        duration: 400,
+        easing: 'easeOutElastic(1, .8)'
+      });
+    });
+  }
+  
+  // Si el DOM ya está cargado, ejecutar inmediatamente
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      // El script se carga automáticamente
+    });
+  }
+</script>

@@ -29,7 +29,7 @@ const portfolioItems = [
     id: 2,
     title: "Contenido para marcas/redes sociales",
     category: "Producción de Moda",
-    images: ["images/valenpinamar3.jpeg" ,"images/valenpinamar1.jpeg" , "images/valenpinamar2.jpeg", "images/valenpinamar4.jpeg"], // Carrusel para este proyecto
+    images: ["images/valenpinamar3.jpeg"  , "images/valenpinamar2.jpeg", "images/valenpinamar4.jpeg"], // Carrusel para este proyecto
     description: "Dirección creativa."
   },
   {
@@ -128,7 +128,16 @@ const portfolioItems = [
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  // Cargar Anime.js desde CDN
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+  script.onload = () => {
+    // Una vez cargado Anime.js, inicializar las animaciones
+    initAnimations();
+  };
+  document.head.appendChild(script);
+  
+  function initAnimations() {
     // Solo navegación manual para carruseles
     const carousels = document.querySelectorAll('[data-carousel]');
     
@@ -139,21 +148,42 @@ const portfolioItems = [
       const nextBtn = carousel.querySelector('.carousel-next');
       let currentSlide = 0;
       
-      // Función para mostrar slide específico
+      // Función para mostrar slide específico con animación
       function showSlide(slideIndex: number) {
         slides.forEach((slide, index) => {
           const htmlSlide = slide as HTMLElement;
           if (index === slideIndex) {
-            htmlSlide.style.opacity = '1';
+            // @ts-ignore - anime is loaded globally
+            anime({
+              targets: htmlSlide,
+              opacity: [0, 1],
+              scale: [0.9, 1],
+              duration: 600,
+              easing: 'easeOutCubic'
+            });
           } else {
-            htmlSlide.style.opacity = '0';
+            // @ts-ignore - anime is loaded globally
+            anime({
+              targets: htmlSlide,
+              opacity: 0,
+              duration: 300,
+              easing: 'easeInCubic'
+            });
           }
         });
         
+        // Animar dots
         dots.forEach((dot, index) => {
           if (index === slideIndex) {
             dot.classList.remove('bg-white/50');
             dot.classList.add('bg-white');
+            // @ts-ignore - anime is loaded globally
+            anime({
+              targets: dot,
+              scale: [1, 1.2, 1],
+              duration: 400,
+              easing: 'easeOutElastic(1, .8)'
+            });
           } else {
             dot.classList.remove('bg-white');
             dot.classList.add('bg-white/50');
@@ -184,5 +214,24 @@ const portfolioItems = [
         });
       });
     });
-  });
+
+    // Animación de entrada para las tarjetas del portfolio
+    // @ts-ignore - anime is loaded globally
+    anime({
+      targets: '.group',
+      translateY: [100, 0],
+      opacity: [0, 1],
+      // @ts-ignore - anime is loaded globally
+      delay: anime.stagger(200),
+      duration: 800,
+      easing: 'easeOutCubic'
+    });
+  }
+  
+  // Si el DOM ya está cargado, ejecutar inmediatamente
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      // El script se carga automáticamente
+    });
+  }
 </script>
