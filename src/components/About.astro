@@ -8,7 +8,7 @@
     <div class="grid lg:grid-cols-2 gap-12 items-start mb-16">
       
       <!-- Left Column: About & Education -->
-      <div class="space-y-16">
+      <div class="space-y-16 about-left-column">
         
         <!-- Simple About -->
         <div>
@@ -29,7 +29,7 @@
               Formación & Certificaciones
             </h3>
             <p class="text-gray-600">
-              Educación continua en las mejores instituciones
+            Educación continua en las mejores instituciones
             </p>
           </div>
           
@@ -72,7 +72,7 @@
       </div>
       
       <!-- Right Column: Image -->
-      <div class="lg:sticky lg:top-8">
+      <div class="lg:sticky lg:top-8 about-right-column">
         <div class="relative">
           <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
             <img 
@@ -88,7 +88,7 @@
     </div>
     
     <!-- Skills & Tools -->
-    <div class="mb-16">
+    <div class="mb-16 about-skills-section">
       <div class="text-center mb-12">
         <h3 class="text-2xl md:text-3xl font-display font-light text-black mb-4">
           Herramientas & Plataformas
@@ -161,7 +161,7 @@
     </div>
     
     <!-- Three Simple Services -->
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-8 about-services-section">
       <div class="text-center p-6 hover:bg-white transition-colors duration-300">
         <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
           <span class="text-white text-2xl">📸</span>
@@ -188,3 +188,159 @@
     </div>
   </div>
 </section>
+
+<script>
+  // Cargar Anime.js desde CDN para About
+  function loadAnimeForAbout() {
+    // Verificar si Anime.js ya está cargado (desde Hero)
+    // @ts-ignore
+    if (typeof anime !== 'undefined') {
+      initAboutAnimations();
+    } else {
+      // Cargar desde CDN si no está disponible
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+      script.onload = () => {
+        initAboutAnimations();
+      };
+      document.head.appendChild(script);
+    }
+  }
+  
+  function initAboutAnimations() {
+    // Configurar estado inicial de las columnas
+    const leftColumn = document.querySelector('.about-left-column') as HTMLElement;
+    const rightColumn = document.querySelector('.about-right-column') as HTMLElement;
+    const skillsSection = document.querySelector('.about-skills-section') as HTMLElement;
+    const servicesSection = document.querySelector('.about-services-section') as HTMLElement;
+    
+    if (leftColumn && rightColumn) {
+      // Ocultar inicialmente las columnas
+      leftColumn.style.opacity = '0';
+      leftColumn.style.transform = 'translateX(-100px)';
+      rightColumn.style.opacity = '0';
+      rightColumn.style.transform = 'translateX(100px)';
+      
+      if (skillsSection) {
+        skillsSection.style.opacity = '0';
+        skillsSection.style.transform = 'translateY(50px)';
+      }
+      
+      if (servicesSection) {
+        servicesSection.style.opacity = '0';
+        servicesSection.style.transform = 'translateY(50px)';
+      }
+    }
+    
+    // Configurar Intersection Observer para activar las animaciones
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '-50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.target.id === 'about') {
+          // Crear timeline para las animaciones coordinadas
+          // @ts-ignore - anime is loaded globally
+          const tl = anime.timeline({
+            easing: 'easeOutCubic',
+            duration: 1000
+          });
+          
+          // Animación principal: columnas que se encuentran
+          tl.add({
+            targets: '.about-left-column',
+            translateX: [-100, 0],
+            opacity: [0, 1],
+            duration: 1200,
+            easing: 'easeOutBack'
+          })
+          .add({
+            targets: '.about-right-column',
+            translateX: [100, 0],
+            opacity: [0, 1],
+            duration: 1200,
+            easing: 'easeOutBack'
+          }, '-=1000') // Se superpone con la animación anterior
+          
+          // Efecto sutil de "magnetismo" - las columnas se acercan ligeramente
+          .add({
+            targets: '.about-left-column',
+            translateX: [0, 10, 0],
+            duration: 600,
+            easing: 'easeInOutSine'
+          }, '-=400')
+          .add({
+            targets: '.about-right-column',
+            translateX: [0, -10, 0],
+            duration: 600,
+            easing: 'easeInOutSine'
+          }, '-=600')
+          
+          // Animación de las skills con stagger (tipo pop-up)
+          .add({
+            targets: '.about-skills-section',
+            translateY: [50, 0],
+            opacity: [0, 1],
+            duration: 800,
+            easing: 'easeOutQuart'
+          }, '-=200')
+          
+          // Animación de las herramientas individuales con efecto stagger
+          .add({
+            targets: '.about-skills-section > div > div > div',
+            scale: [0.8, 1],
+            opacity: [0, 1],
+            // @ts-ignore - anime is loaded globally
+            delay: anime.stagger(100),
+            duration: 600,
+            easing: 'easeOutElastic(1, .8)'
+          }, '-=400')
+          
+          // Animación de los servicios
+          .add({
+            targets: '.about-services-section',
+            translateY: [50, 0],
+            opacity: [0, 1],
+            duration: 800,
+            easing: 'easeOutQuart'
+          }, '-=600')
+          
+          // Animación individual de cada servicio
+          .add({
+            targets: '.about-services-section > div',
+            translateY: [30, 0],
+            scale: [0.9, 1],
+            opacity: [0, 1],
+            // @ts-ignore - anime is loaded globally
+            delay: anime.stagger(200),
+            duration: 700,
+            easing: 'easeOutBack'
+          }, '-=400');
+          
+          // Desconectar el observer después de la primera activación
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observar la sección About
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      observer.observe(aboutSection);
+    }
+  }
+  
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAnimeForAbout();
+  });
+  
+  // También inicializar inmediatamente si el DOM ya está cargado
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadAnimeForAbout);
+  } else {
+    loadAnimeForAbout();
+  }
+</script>
