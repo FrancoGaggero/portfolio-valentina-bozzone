@@ -1,12 +1,40 @@
 ---
 // Portfolio simple con pocos proyectos destacados
 const portfolioItems = [
-   { 
+    { 
     id: 7,
+    title: "cuarto urbano ",
+    category: "Producción Fotográfica",
+    images: ["images/cuarto1.jpeg", "images/cuarto2.jpeg","images/cuarto3.jpeg","images/cuarto4.jpeg"], // Carrusel para este proyecto
+    description: "Estilismo y Producción.",
+    photographer: "Flor Zoccola", // Solo nombre, el Instagram va en photographerLink
+    photographerLink: "https://instagram.com/florzoccola.fotos" // Link directo
+  },
+    { 
+    id: 8,
+    title: "cuarto urbano ",
+    category: "Producción Fotográfica",
+    images: ["images/cuarto5.jpeg", "images/cuarto6.jpeg","images/cuarto7.jpeg","images/cuarto8.jpeg"], // Carrusel para este proyecto
+    description: "Estilismo y Producción.",
+    photographer: "Flor Zoccola", // Solo nombre, el Instagram va en photographerLink
+    photographerLink: "https://instagram.com/florzoccola.fotos" // Link directo
+  },
+    { 
+    id: 9,
+    title: "cuarto urbano ",
+    category: "Producción Fotográfica",
+    images: ["images/cuarto9.jpeg", "images/cuarto10.jpeg","images/cuarto11.jpeg","images/cuarto12.jpeg"], // Carrusel para este proyecto
+    description: "Estilismo y Producción.",
+    photographer: "Flor Zoccola", // Solo nombre, el Instagram va en photographerLink
+    photographerLink: "https://instagram.com/florzoccola.fotos" // Link directo
+  },
+   { 
+    id: 10,
     title: "Producción de Moda",
     category: "Producción Fotográfica UNITIVO",
     images: ["images/unitivo1.jpeg", "images/unitivo2.jpeg","images/unitivo3.jpeg","images/unitivo4.jpeg", "images/unitivo5.jpeg", "images/unitivo6.jpeg"], // Carrusel para este proyecto
     description: "Estilismo y producción para Nico Goldschmidt."
+   
   },
    {
     //confirmar titulos ver posibles cambios
@@ -119,7 +147,26 @@ const portfolioItems = [
           <div>
             <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">{item.category}</p>
             <h3 class="text-lg font-medium text-black mb-2">{item.title}</h3>
-            <p class="text-gray-600 text-sm">{item.description}</p>
+            <p class="text-gray-600 text-sm mb-2">{item.description}</p>
+            
+            <!-- Photographer credit (only if provided) -->
+            {item.photographer && (
+              <div class="flex items-center space-x-2 mt-3 pt-2 border-t border-gray-100">
+                <span class="text-xs text-gray-500">Fotografía:</span>
+                {item.photographerLink ? (
+                  <a 
+                    href={item.photographerLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-xs font-medium text-black hover:text-gray-600 transition-colors duration-300"
+                  >
+                    {item.photographer}
+                  </a>
+                ) : (
+                  <span class="text-xs font-medium text-gray-700">{item.photographer}</span>
+                )}
+              </div>
+            )}
           </div>
         </div>
       ))}
