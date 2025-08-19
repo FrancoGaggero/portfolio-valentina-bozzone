@@ -1,6 +1,15 @@
 ---
 // Portfolio simple con pocos proyectos destacados
 const portfolioItems = [
+  { 
+    id: 7,
+    title: "Producción de Moda",
+    category: "Producción Fotográfica",
+    images: ["images/agus5.jpeg","images/agus4.jpeg","images/agus1.jpeg","images/agus3.jpeg", "images/agus2.jpeg","images/agus6.jpeg"], // Carrusel para este proyecto
+    description: "Estilismo y Producción.",
+    photographer: "Flor Zoccola", // Solo nombre, el Instagram va en photographerLink
+    photographerLink: "https://instagram.com/florzoccola.fotos" // Link directo
+  },
     { 
     id: 7,
     title: "Producción de Moda",
@@ -19,6 +28,17 @@ const portfolioItems = [
     photographer: "Flor Zoccola", // Solo nombre, el Instagram va en photographerLink
     photographerLink: "https://instagram.com/florzoccola.fotos" // Link directo
   },
+
+      { 
+    id: 8,
+    title: "Producción de Moda",
+    category: "Producción Fotográfica",
+    images: ["images/agus9.jpeg","images/agus7.jpeg", "images/agus8.jpeg","images/agus10.jpeg", "images/agus11.jpeg", "images/agus12.jpeg"], // Carrusel para este proyecto
+    description: "Estilismo y Producción.",
+    photographer: "Flor Zoccola", // Solo nombre, el Instagram va en photographerLink
+    photographerLink: "https://instagram.com/florzoccola.fotos" // Link directo
+  },
+
     { 
     id: 9,
     title: "Producción de Moda",
@@ -33,7 +53,9 @@ const portfolioItems = [
     title: "Producción de Moda",
     category: "Producción Fotográfica UNITIVO",
     images: ["images/unitivo1.jpeg", "images/unitivo2.jpeg","images/unitivo3.jpeg","images/unitivo4.jpeg", "images/unitivo5.jpeg", "images/unitivo6.jpeg"], // Carrusel para este proyecto
-    description: "Estilismo y producción para Nico Goldschmidt."
+    description: "Estilismo y producción para Nico Goldschmidt.",
+    photographer: "Flor Zoccola", // Solo nombre, el Instagram va en photographerLink
+    photographerLink: "https://instagram.com/florzoccola.fotos" // Link directo
    
   },
    {
@@ -175,17 +197,8 @@ const portfolioItems = [
 </section>
 
 <script>
-  // Cargar Anime.js desde CDN
-  const script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
-  script.onload = () => {
-    // Una vez cargado Anime.js, inicializar las animaciones
-    initAnimations();
-  };
-  document.head.appendChild(script);
-  
-  function initAnimations() {
-    // Solo navegación manual para carruseles
+  // Navegación rápida para carruseles sin animaciones lentas
+  document.addEventListener('DOMContentLoaded', () => {
     const carousels = document.querySelectorAll('[data-carousel]');
     
     carousels.forEach(carousel => {
@@ -195,42 +208,22 @@ const portfolioItems = [
       const nextBtn = carousel.querySelector('.carousel-next');
       let currentSlide = 0;
       
-      // Función para mostrar slide específico con animación
+      // Función para mostrar slide específico - sin animaciones lentas
       function showSlide(slideIndex: number) {
         slides.forEach((slide, index) => {
           const htmlSlide = slide as HTMLElement;
           if (index === slideIndex) {
-            // @ts-ignore - anime is loaded globally
-            anime({
-              targets: htmlSlide,
-              opacity: [0, 1],
-              scale: [0.9, 1],
-              duration: 600,
-              easing: 'easeOutCubic'
-            });
+            htmlSlide.style.opacity = '1';
           } else {
-            // @ts-ignore - anime is loaded globally
-            anime({
-              targets: htmlSlide,
-              opacity: 0,
-              duration: 300,
-              easing: 'easeInCubic'
-            });
+            htmlSlide.style.opacity = '0';
           }
         });
         
-        // Animar dots
+        // Actualizar dots sin animaciones
         dots.forEach((dot, index) => {
           if (index === slideIndex) {
             dot.classList.remove('bg-white/50');
             dot.classList.add('bg-white');
-            // @ts-ignore - anime is loaded globally
-            anime({
-              targets: dot,
-              scale: [1, 1.2, 1],
-              duration: 400,
-              easing: 'easeOutElastic(1, .8)'
-            });
           } else {
             dot.classList.remove('bg-white');
             dot.classList.add('bg-white/50');
@@ -261,24 +254,5 @@ const portfolioItems = [
         });
       });
     });
-
-    // Animación de entrada para las tarjetas del portfolio
-    // @ts-ignore - anime is loaded globally
-    anime({
-      targets: '.group',
-      translateY: [100, 0],
-      opacity: [0, 1],
-      // @ts-ignore - anime is loaded globally
-      delay: anime.stagger(200),
-      duration: 800,
-      easing: 'easeOutCubic'
-    });
-  }
-  
-  // Si el DOM ya está cargado, ejecutar inmediatamente
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      // El script se carga automáticamente
-    });
-  }
+  });
 </script>
