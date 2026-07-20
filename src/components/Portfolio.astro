@@ -146,9 +146,13 @@ const portfolioItems = [
                     class={`carousel-slide absolute inset-0 transition-opacity duration-500 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
                     data-slide={index}
                   >
-                    <img 
-                      src={img} 
+                    <img
+                      src={img}
                       alt={`${item.title} - Imagen ${index + 1}`}
+                      width="800"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
                       class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
