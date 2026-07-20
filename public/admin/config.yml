@@ -1,0 +1,103 @@
+backend:
+  name: github
+  repo: FrancoGaggero/portfolio-valentina-bozzone
+  branch: master
+
+# Idioma del panel
+locale: es
+
+# Dónde se guardan las imágenes subidas desde el CMS
+media_folder: public/images
+public_folder: /images
+
+collections:
+  # ----- Portfolio (CRUD de proyectos) -----
+  - name: portfolio
+    label: Portfolio
+    label_singular: Proyecto
+    description: Proyectos que se muestran en la grilla del portfolio.
+    folder: src/content/portfolio
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    sortable_fields: [order, title]
+    summary: '{{fields.order}} · {{title}}'
+    fields:
+      - { name: title, label: Título, widget: string }
+      - name: order
+        label: Orden
+        widget: number
+        value_type: int
+        min: 1
+        default: 1
+        hint: Posición en la grilla. Menor número = aparece primero.
+      - { name: category, label: Categoría, widget: string, default: Producción Fotográfica }
+      - { name: description, label: Descripción, widget: text, required: false }
+      - { name: photographer, label: Fotógrafo/a, widget: string, required: false }
+      - { name: photographerLink, label: Link del fotógrafo/a (Instagram), widget: string, required: false }
+      - name: images
+        label: Galería de imágenes
+        widget: list
+        summary: '{{fields.image}}'
+        field: { name: image, label: Imagen, widget: image }
+      - { name: body, label: Texto adicional (opcional), widget: markdown, required: false }
+
+  # ----- Contenido del sitio (textos fijos) -----
+  - name: contenido
+    label: Contenido del sitio
+    description: Textos e imágenes de las secciones principales.
+    files:
+      - name: hero
+        label: Portada (inicio)
+        file: src/data/hero.json
+        fields:
+          - { name: firstName, label: Nombre, widget: string }
+          - { name: lastName, label: Apellido, widget: string }
+          - { name: subtitle, label: Subtítulo, widget: text }
+          - { name: ctaText, label: Texto del botón, widget: string }
+
+      - name: about
+        label: Sobre Mí
+        file: src/data/about.json
+        fields:
+          - { name: heading, label: Título, widget: string }
+          - { name: bio, label: Biografía, widget: text }
+          - { name: image, label: Foto, widget: image }
+          - { name: imageAlt, label: Texto alternativo de la foto, widget: string, required: false }
+          - { name: formationHeading, label: Título de formación, widget: string }
+          - { name: formationSubtitle, label: Subtítulo de formación, widget: string, required: false }
+          - name: education
+            label: Formación & Certificaciones
+            label_singular: Certificación
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: badge, label: Sigla (ej. UP), widget: string }
+              - { name: name, label: Institución, widget: string }
+              - { name: subtitle, label: Subtítulo, widget: string, required: false }
+              - { name: description, label: Descripción, widget: text }
+          - name: services
+            label: Servicios
+            label_singular: Servicio
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: icon, label: Ícono (emoji), widget: string }
+              - { name: title, label: Título, widget: string }
+              - { name: description, label: Descripción, widget: text }
+
+      - name: contact
+        label: Contacto
+        file: src/data/contact.json
+        fields:
+          - { name: heading, label: Título, widget: string }
+          - { name: intro, label: Introducción, widget: text }
+          - { name: instagram, label: Usuario de Instagram (visible), widget: string }
+          - { name: instagramUrl, label: Link de Instagram, widget: string }
+          - { name: email, label: Email, widget: string }
+          - { name: whatsappDisplay, label: WhatsApp (texto visible), widget: string }
+          - { name: whatsappUrl, label: Link de WhatsApp, widget: string }
+          - { name: location, label: Ubicación, widget: string }
+          - { name: formEndpoint, label: Endpoint del formulario (Formspree), widget: string }

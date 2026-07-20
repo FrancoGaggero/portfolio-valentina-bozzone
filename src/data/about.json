@@ -1,0 +1,39 @@
+{
+  "heading": "Sobre Mí",
+  "bio": "Soy Productora de Moda, Community Manager y estudiante en Diseño y Comunicación. Tengo una mirada estratégica, estetica y resolutiva que me permite crear contenido visual que conecta marcas con sus audiencias de manera auténtica.",
+  "image": "/images/ny.jpeg",
+  "imageAlt": "Valentina Bozzone",
+  "formationHeading": "Formación & Certificaciones",
+  "formationSubtitle": "Educación continua en las mejores instituciones",
+  "education": [
+    {
+      "badge": "UP",
+      "name": "Universidad de Palermo",
+      "subtitle": "Educación Superior",
+      "description": "Formación en Producción de Moda y Licenciatura en Gestión de proyectos de Diseño y Comunicación."
+    },
+    {
+      "badge": "CODER",
+      "name": "Coder House",
+      "subtitle": "Certificaciones Digitales",
+      "description": "Marketing Digital: Community Management. Photoshop e Illustrator."
+    }
+  ],
+  "services": [
+    {
+      "icon": "📸",
+      "title": "Producción",
+      "description": "Dirección creativa y producción de contenido visual"
+    },
+    {
+      "icon": "📱",
+      "title": "Community",
+      "description": "Gestión estratégica de redes sociales"
+    },
+    {
+      "icon": "🎨",
+      "title": "Branding",
+      "description": "Desarrollo de identidad visual"
+    }
+  ]
+}

@@ -1,26 +1,27 @@
 ---
+import hero from '../data/hero.json';
 ---
 
 <section id="home" class="min-h-screen flex items-center justify-center px-6 bg-white relative overflow-hidden">
   <div class="container mx-auto max-w-4xl relative z-10">
     <div class="text-center">
-        
-      
+
+
       <!-- Main Heading -->
       <h1 class="text-6xl md:text-8xl lg:text-9xl font-display font-light mb-8 leading-tight tracking-tight">
-        <span class="text-black hero-name-first">Valentina</span>
+        <span class="text-black hero-name-first">{hero.firstName}</span>
         <br>
-        <span class="text-gray-500 hero-name-last">Bozzone</span>
+        <span class="text-gray-500 hero-name-last">{hero.lastName}</span>
       </h1>
-      
+
       <!-- Simple Subtitle -->
       <p class="text-lg md:text-xl text-gray-500 mb-12 max-w-md mx-auto font-light hero-subtitle">
-        Productora de Moda, Diseño y Comunicación, Community Manager
+        {hero.subtitle}
       </p>
-      
+
       <!-- Single CTA -->
       <a href="#portfolio" class="inline-flex items-center px-8 py-3 bg-black hover:bg-gray-800 text-white font-medium transition-all duration-300 hover:scale-105 hero-cta">
-        Ver Portfolio
+        {hero.ctaText}
       </a>
     </div>
     

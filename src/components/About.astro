@@ -1,4 +1,5 @@
 ---
+import about from '../data/about.json';
 ---
 
 <section id="about" class="py-20 px-6 bg-gray-50">
@@ -13,60 +14,42 @@
         <!-- Simple About -->
         <div>
           <h2 class="text-4xl md:text-5xl font-display font-light mb-8 text-black ">
-            Sobre Mí
+            {about.heading}
           </h2>
-          
+
           <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-12">
-            Soy Productora de Moda, Community Manager y estudiante en Diseño y Comunicación.
-            Tengo una mirada estratégica, estetica y resolutiva que me permite crear contenido visual que conecta marcas con sus audiencias de manera auténtica.
+            {about.bio}
           </p>
         </div>
-        
+
         <!-- Education & Certifications -->
         <div>
           <div class="mb-12">
             <h3 class="text-2xl md:text-3xl font-display font-light text-black mb-4">
-              Formación & Certificaciones
+              {about.formationHeading}
             </h3>
             <p class="text-gray-600">
-            Educación continua en las mejores instituciones
+            {about.formationSubtitle}
             </p>
           </div>
-          
-          <div class="space-y-6">
-        
-            <!-- Universidad de Palermo -->
-            <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:shadow-md transition-shadow duration-300">
-              <div class="flex items-center space-x-4 mb-4">
-                <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                  <span class="text-white font-bold text-sm">UP</span>
-                </div>
-                <div>
-                  <h4 class="text-lg font-medium text-black">Universidad de Palermo</h4>
-                  <p class="text-sm text-gray-500">Educación Superior</p>
-                </div>
-              </div>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                Formación en Producción de Moda y Licenciatura en Gestión de proyectos de Diseño y Comunicación.
-              </p>
-            </div>
 
-            <!-- Coder House -->
-            <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:shadow-md transition-shadow duration-300">
-              <div class="flex items-center space-x-4 mb-4">
-                <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                  <span class="text-white font-bold text-xs">CODER</span>
+          <div class="space-y-6">
+            {about.education.map((item) => (
+              <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                <div class="flex items-center space-x-4 mb-4">
+                  <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
+                    <span class={`text-white font-bold ${item.badge.length > 3 ? 'text-xs' : 'text-sm'}`}>{item.badge}</span>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-medium text-black">{item.name}</h4>
+                    <p class="text-sm text-gray-500">{item.subtitle}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 class="text-lg font-medium text-black">Coder House</h4>
-                  <p class="text-sm text-gray-500">Certificaciones Digitales</p>
-                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                Marketing Digital: Community Management. <br>
-                Photoshop e Illustrator.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -76,8 +59,8 @@
         <div class="relative">
           <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
             <img
-              src="/images/ny.jpeg"
-              alt="Valentina Bozzone"
+              src={about.image}
+              alt={about.imageAlt}
               width="1440"
               height="1920"
               loading="lazy"
@@ -166,29 +149,15 @@
     
     <!-- Three Simple Services -->
     <div class="grid md:grid-cols-3 gap-8 about-services-section">
-      <div class="text-center p-6 hover:bg-white transition-colors duration-300">
-        <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-          <span class="text-white text-2xl">📸</span>
+      {about.services.map((service) => (
+        <div class="text-center p-6 hover:bg-white transition-colors duration-300">
+          <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-white text-2xl">{service.icon}</span>
+          </div>
+          <h3 class="text-lg font-medium text-black mb-2">{service.title}</h3>
+          <p class="text-gray-600 text-sm">{service.description}</p>
         </div>
-        <h3 class="text-lg font-medium text-black mb-2">Producción</h3>
-        <p class="text-gray-600 text-sm">Dirección creativa y producción de contenido visual</p>
-      </div>
-      
-      <div class="text-center p-6 hover:bg-white transition-colors duration-300">
-        <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-          <span class="text-white text-2xl">📱</span>
-        </div>
-        <h3 class="text-lg font-medium text-black mb-2">Community</h3>
-        <p class="text-gray-600 text-sm">Gestión estratégica de redes sociales</p>
-      </div>
-      
-      <div class="text-center p-6 hover:bg-white transition-colors duration-300">
-        <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-          <span class="text-white text-2xl">🎨</span>
-        </div>
-        <h3 class="text-lg font-medium text-black mb-2">Branding</h3>
-        <p class="text-gray-600 text-sm">Desarrollo de identidad visual</p>
-      </div>
+      ))}
     </div>
   </div>
 </section>

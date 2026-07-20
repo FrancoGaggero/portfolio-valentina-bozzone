@@ -1,0 +1,20 @@
+---
+// Panel de administración (Sveltia CMS) servido como ruta /admin/.
+// La configuración vive en public/admin/config.yml.
+export const prerender = true;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Panel de administración — Valentina Bozzone</title>
+    <!-- Ruta absoluta de la config para que no dependa de la barra final -->
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+  </head>
+  <body>
+    <script is:inline src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+  </body>
+</html>

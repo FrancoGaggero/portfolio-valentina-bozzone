@@ -1,4 +1,5 @@
 ---
+import contact from '../data/contact.json';
 ---
 
 <section id="contact" class="py-20 px-6 bg-white">
@@ -7,11 +8,10 @@
     <!-- Elegant Header -->
     <div class="text-center mb-20 fade-in">
       <h2 class="text-5xl md:text-6xl font-display font-light mb-6 text-black tracking-tight">
-        Trabajemos Juntos
+        {contact.heading}
       </h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-      Si estás buscando desarrollar contenido con valor y optimizar tu comunicación, aporto una mirada integral y sensible a cada etapa del proceso creativo.
-        
+      {contact.intro}
       </p>
     </div>
 
@@ -35,8 +35,8 @@
                   </div>
                   <div>
                     <p class="text-sm text-gray-500 uppercase tracking-wide">Instagram</p>
-                    <a href="https://www.instagram.com/portfoliobyvalen?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="text-lg text-black hover:text-gray-600 transition-colors" target="_blank">
-                  portfoliobyvalen                    
+                    <a href={contact.instagramUrl} class="text-lg text-black hover:text-gray-600 transition-colors" target="_blank">
+                  {contact.instagram}
                 </a>
                   </div>
                 </div>
@@ -50,8 +50,8 @@
                   </div>
                   <div>
                     <p class="text-sm text-gray-500 uppercase tracking-wide">Email</p>
-                    <a href="mailto:valentinabozzone28@gmail.com" class="text-lg text-black hover:text-gray-600 transition-colors">
-                      valentinabozzone28@gmail.com
+                    <a href={`mailto:${contact.email}`} class="text-lg text-black hover:text-gray-600 transition-colors">
+                      {contact.email}
                     </a>
                   </div>
                 </div>
@@ -64,8 +64,8 @@
                   </div>
                   <div>
                     <p class="text-sm text-gray-500 uppercase tracking-wide">WhatsApp</p>
-                    <a href="https://wa.me/5491127567099" class="text-lg text-black hover:text-gray-600 transition-colors" target="_blank">
-                        +54 9 11 2756-7099
+                    <a href={contact.whatsappUrl} class="text-lg text-black hover:text-gray-600 transition-colors" target="_blank">
+                        {contact.whatsappDisplay}
                     </a>
                   </div>
                 </div>
@@ -78,7 +78,7 @@
                   </div>
                   <div>
                     <p class="text-sm text-gray-500 uppercase tracking-wide">Ubicación</p>
-                    <p class="text-lg text-black">Buenos Aires, Argentina</p>
+                    <p class="text-lg text-black">{contact.location}</p>
                   </div>
                 </div>
               </div>
@@ -107,7 +107,7 @@
       <div class="fade-in">
         <form 
           id="contactForm" 
-          action="https://formspree.io/f/mdkdaand" 
+          action={contact.formEndpoint}
           method="POST"
           class="space-y-6"
         >
